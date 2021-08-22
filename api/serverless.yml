@@ -1,0 +1,46 @@
+service: demo-pexels-shotstack
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: demo
+  region: ap-southeast-2
+  logRetentionInDays: 30
+  deploymentBucket:
+    name: ${env:SERVERLESS_DEPLOYMENT_BUCKET_PREFIX}-${self:provider.region}
+    blockPublicAccess: true
+  environment:
+    PEXELS_API_KEY: ${env:PEXELS_API_KEY}
+    SHOTSTACK_API_KEY: ${env:SHOTSTACK_API_KEY}
+    SHOTSTACK_HOST: ${env:SHOTSTACK_HOST}
+
+package:
+  exclude:
+    - .env
+    - .env.dist
+    - package.json
+    - package-lock.json
+    - src/app.js
+
+functions:
+  shotstack:
+    handler: src/handler/shotstack/handler.submit
+    description: Demo - Pexels image search and image render
+    timeout: 15
+    memorySize: 128
+    events:
+      - http:
+          path: shotstack
+          method: post
+          cors: true
+  status:
+    handler: src/handler/shotstack/handler.status
+    description: Demo - Pexels image status check
+    timeout: 10
+    memorySize: 128
+    events:
+      - http:
+          path: shotstack/{id}
+          method: get
+          cors: true
