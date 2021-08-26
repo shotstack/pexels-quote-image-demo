@@ -149,7 +149,6 @@ function resetForm() {
  * Reset and delete image
  */
 function resetImage() {
-
     progress = 0;
     $('#preview').hide();
     $('#preview').attr('src', '');
@@ -168,7 +167,7 @@ function submitImageEdit() {
 
     var formData = {
         search: $('#search').val(),
-        title: $('#title').val() || ' ',
+        title: $('#title').val(),
         style: $('#style option:selected').val(),
     };
 

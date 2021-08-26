@@ -30,21 +30,19 @@
                                id="search"
                                placeholder="cats mountains people etc..."
                                maxlength="30"
-                               required
-                        >
+                               required />
                     </div>
                     <div class="form-group" id="title-group">
-                        <label for="title">Add a Message</label>
+                        <label for="title">Add a Quote or Message</label>
                         <textarea name="title"
                                type="text"
-                               pattern="[a-zA-Z0-9 ]+"
-                               oninvalid="setCustomValidity('Only letters and numbers are allowed')"
+                               oninvalid="setCustomValidity('Message must be between 1 and 100 characters')"
                                oninput="setCustomValidity('')"
                                class="form-control"
                                id="title"
-                               placeholder="My Movie"
-                               maxlength="60"
-                        ></textarea>
+                               placeholder="Don't let yesterday take up too much of today."
+                               maxlength="100"
+                               required></textarea>
                     </div>
                     <div class="form-group" id="style-group">
                         <label for="style">Choose a Style</label>
