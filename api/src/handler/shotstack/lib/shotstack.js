@@ -10,7 +10,7 @@ const shotstackApiKey = process.env.SHOTSTACK_API_KEY;
 module.exports.submit = (data) => {
     const schema = {
         search: Joi.string().regex(/^[a-zA-Z0-9 ]*$/).min(2).max(30).required(),
-        title: Joi.string().regex(/^[a-zA-Z0-9 ]*$/).min(0).max(60),
+        title: Joi.string().min(1).max(100).required(),
         style: Joi.string().valid(['style_1', 'style_2', 'style_3']).required(),
     };
 
@@ -190,7 +190,7 @@ module.exports.status = (id) => {
         }
 
         request({
-            url: shotstackUrl + 'render/' + id + '?timeline=false',
+            url: shotstackUrl + 'render/' + id,
             method: 'GET',
             headers: {
                 'x-api-key': shotstackApiKey
