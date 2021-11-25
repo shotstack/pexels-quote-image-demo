@@ -19,8 +19,21 @@
         <div class="row">
             <div class="col-5">
                 <form class="jumbotron" method="post">
+                    <div class="form-group" id="title-group">
+                        <label for="title">Motivational Quote</label>
+                        <textarea name="title"
+                              type="text"
+                              oninvalid="setCustomValidity('Message must be between 1 and 100 characters')"
+                              oninput="setCustomValidity('')"
+                              class="form-control"
+                              id="title"
+                              placeholder="Don't let yesterday take up too much of today."
+                              maxlength="100"
+                              required></textarea>
+                          <small class="form-text text-muted">Enter a motiviational quote, proverb or message.</small>
+                    </div>
                     <div class="form-group" id="search-group">
-                        <label for="search" class="display-4">Make an image about</label>
+                        <label for="search">Background image</label>
                         <input name="search" 
                                type="text"
                                pattern="[a-zA-Z0-9 ]+"
@@ -31,26 +44,15 @@
                                placeholder="cats mountains people etc..."
                                maxlength="30"
                                required />
-                    </div>
-                    <div class="form-group" id="title-group">
-                        <label for="title">Add a Quote or Message</label>
-                        <textarea name="title"
-                               type="text"
-                               oninvalid="setCustomValidity('Message must be between 1 and 100 characters')"
-                               oninput="setCustomValidity('')"
-                               class="form-control"
-                               id="title"
-                               placeholder="Don't let yesterday take up too much of today."
-                               maxlength="100"
-                               required></textarea>
+                        <small class="form-text text-muted">Search the Pexels library for an image.</small>
                     </div>
                     <div class="form-group" id="style-group">
-                        <label for="style">Choose a Style</label>
+                        <label for="style">Border Style</label>
                         <select name="style" id="style" class="custom-select" required>
                             <option value="">Choose...</option>
-                            <option value="style_1">Style 1</option>
-                            <option value="style_2">Style 2</option>
-                            <option value="style_3">Style 3</option>
+                            <option value="style_1">Decorative</option>
+                            <option value="style_2">Rugged</option>
+                            <option value="style_3">Classic</option>
                         </select>
                     </div>
                     <div class="alert alert-danger d-none" role="alert" id="errors"></div>

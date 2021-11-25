@@ -1,4 +1,4 @@
-service: demo-pexels-shotstack
+service: demo-pexels-quote-image-shotstack
 useDotenv: true
 
 provider:
@@ -26,7 +26,7 @@ package:
 functions:
   shotstack:
     handler: src/handler/shotstack/handler.submit
-    description: Demo - Pexels image search and image render
+    description: Demo - Pexels motivational quote image search and render
     timeout: 15
     memorySize: 128
     events:
@@ -36,7 +36,7 @@ functions:
           cors: true
   status:
     handler: src/handler/shotstack/handler.status
-    description: Demo - Pexels image status check
+    description: Demo - Pexels motivational quote image status check
     timeout: 10
     memorySize: 128
     events:

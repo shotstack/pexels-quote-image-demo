@@ -28,35 +28,47 @@ module.exports.submit = (data) => {
             return reject(valid.error);
         }
 
-        const maxImages = 15;
+        const MAX_RESULTS = 15;
 
-        pexelsClient.search(data.search, maxImages, 1).then(function(pexels) {
+        pexelsClient.search(data.search, MAX_RESULTS, 1).then(function(pexels) {
+            if (pexels.total_results === 0) {
+                throw "No image found for '" + data.search + "', please try a different keyword.";
+            }
+
+            const maxResults = Math.min(pexels.total_results, MAX_RESULTS);
+
             const styleMap = {
                 style_1: {
-                    borderUrl: 'https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/borders/80s-acid-blue-square.png',
+                    borderUrl: 'https://templates.shotstack.io/basic/asset/image/border/dots-curls/square/1080-white.png',
                     font: {
-                        src: 'https://s3.ap-southeast-2.amazonaws.com/templates.shotstack.io/basic/asset/font/montserrat-black.ttf',
-                        familyName: 'Montserrat Black',
-                        color1: '#f4d400',
-                        color2: '#4f4d00'
+                        src: 'https://templates.shotstack.io/basic/asset/font/rye-regular.ttf',
+                        familyName: 'Rye',
+                        color1: '#ffffff',
+                        color2: '#33555555',
+                        size: '64px',
+                        lineHeight: '100',
                     }
                 },
                 style_2: {
-                    borderUrl: 'https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/borders/80s-acid-green-square.png',
+                    borderUrl: 'https://templates.shotstack.io/basic/asset/image/border/tape-scratches/square/1080-white.png',
                     font: {
-                        src: 'https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/fonts/OpenSans-Regular.ttf',
-                        familyName: "OpenSans",
-                        color1: '#f1d101',
-                        color2: '#1f1d10',
+                        src: 'https://templates.shotstack.io/basic/asset/font/specialelite-regular.ttf',
+                        familyName: 'Special Elite',
+                        color1: '#ffffff',
+                        color2: '#cc333333',
+                        size: '68px',
+                        lineHeight: '135',
                     }
                 },
                 style_3: {
-                    borderUrl: 'https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/borders/80s-acid-pink-square.png',
+                    borderUrl: 'https://templates.shotstack.io/basic/asset/image/border/rough-frame-dots/square/1080-white.png',
                     font: {
-                        src: 'https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/fonts/LilitaOne-Regular.ttf',
-                        familyName: "LilitaOne",
-                        color1: '#f9d909',
-                        color2: '#9f9d90',
+                        src: 'https://templates.shotstack.io/basic/asset/font/homemadeapple-regular.ttf',
+                        familyName: "Homemade Apple",
+                        color1: '#ffffff',
+                        color2: '#33555555',
+                        size: '54px',
+                        lineHeight: '80',
                     }
                 },
             };
@@ -67,9 +79,9 @@ module.exports.submit = (data) => {
                             asset: {
                                 type: 'html',
                                 html: `<p>${data.title}</p>`,
-                                css: `p { font-family: "${styleMap[data.style].font.familyName}"; color: ${styleMap[data.style].font.color1}; font-size: 64px; text-align: center; }`,
-                                width: 600,
-                                height: 600,
+                                css: `p { font-family: "${styleMap[data.style].font.familyName}"; color: ${styleMap[data.style].font.color1}; font-size: ${styleMap[data.style].font.size}; line-height: ${styleMap[data.style].font.lineHeight}; text-align: center; }`,
+                                width: 640,
+                                height: 640,
                                 background: 'transparent',
                             },
                             start: 0,
@@ -83,9 +95,9 @@ module.exports.submit = (data) => {
                             asset: {
                                 type: 'html',
                                 html: `<p>${data.title}</p>`,
-                                css: `p { font-family: "${styleMap[data.style].font.familyName}"; color: ${styleMap[data.style].font.color2}; font-size: 64px; text-align: center; }`,
-                                width: 600,
-                                height: 600,
+                                css: `p { font-family: "${styleMap[data.style].font.familyName}"; color: ${styleMap[data.style].font.color2}; font-size: ${styleMap[data.style].font.size}; line-height: ${styleMap[data.style].font.lineHeight}; text-align: center; }`,
+                                width: 640,
+                                height: 640,
                                 background: 'transparent',
                             },
                             start: 0,
@@ -114,7 +126,7 @@ module.exports.submit = (data) => {
                         {
                             asset: {
                                 type: 'image',
-                                src: pexels.photos[Math.floor(Math.random() * maxImages)].src.original,
+                                src: pexels.photos[Math.floor(Math.random() * maxResults)].src.original,
                             },
                             start: 0,
                             length: 1,
