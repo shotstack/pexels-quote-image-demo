@@ -1,20 +1,20 @@
-# Shotstack Pexels Demo
+# Shotstack Motivational Quote Maker Demo
 
 This project demonstrates how to use the Shotstack cloud video editing API to create 
 an image using an HTML form and image sourced from the Pexels image library.
 
 An HTML web form allows the user to search the Pexels library via the Pexels API, choose 
-a style and add a title. An image is the created by the Shotstack API using the images
-returned by the Pexels search and the track and title entered by the user.
+a style, and add a block of text. An image is the created by the Shotstack API using the images
+returned by the Pexels search, and the track and text entered by the user.
 
-View the live demo at: https://shotstack.io/demo/pexels/
+View the live demo at: https://shotstack.io/demo/motivational-quote-maker/
 
-The demo is built using Node JS and can be used with either Express Framework or deployed 
+The demo is built using Node.js and can be used with either Express Framework or deployed 
 as a serverless projects using AWS Lambda and API Gateway.
 
 ### Requirements
 
-- Node 8.10+
+- Node 12+
 - Pexels API key: https://www.pexels.com/api
 - Shotstack API key: https://dashboard.shotstack.io/register
 
@@ -33,7 +33,7 @@ The backend API source code is in the _api_ directory.
 #### Frontend Web Form & Player
 
 The frontend is a simple HTML form that allows the user to enter a search term and basic 
-options to create a video. The form uses jQuery to submit the data to the backend API and 
+options to create an image. The form uses jQuery to submit the data to the backend API and 
 poll the status of the current render. There is also an image preview that is loaded with 
 the final rendered image when ready.
 
